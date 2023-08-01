@@ -1,4 +1,6 @@
+import Colaborador from '../Colaborador'
 import './Equipo.css'
+
 
 const Equipo = (props) => {
     const {titulo, colorPrimario, colorSecundario} = props.datos
@@ -7,7 +9,12 @@ const Equipo = (props) => {
     return(
         <section className="equipo" style={estiloEquipo}>
             <h3 style={estiloTitulo}>{titulo}</h3>
-            <div className="colaboradores"></div>
+            <div className="colaboradores">
+                <Colaborador />
+                <Colaborador />
+                <Colaborador />
+                <Colaborador />
+            </div>
         </section>
     )
 }
