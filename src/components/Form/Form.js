@@ -5,7 +5,8 @@ import ListaOpciones from "../ListaOpciones"
 import "./Form.css"
 
 
-const Form = () => {
+const Form = (props) => {
+    console.log(props.equipo)
     const [nombre, setNombre] = useState('')
     const [puesto, setPuesto] = useState('')
     const [foto, setFoto] = useState('')
@@ -53,6 +54,7 @@ const Form = () => {
                     required
                     valor={equipo}
                     setValor={setEquipo}
+                    equipos={props.equipos}
                 />
                 <Boton>
                     Crear
