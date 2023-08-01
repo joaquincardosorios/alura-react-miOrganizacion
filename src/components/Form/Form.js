@@ -6,11 +6,12 @@ import "./Form.css"
 
 
 const Form = (props) => {
-    console.log(props.equipo)
     const [nombre, setNombre] = useState('')
     const [puesto, setPuesto] = useState('')
     const [foto, setFoto] = useState('')
     const [equipo, setEquipo] = useState('')
+
+    const { registrarColaborador } = props
 
     const manejarEnvio = (e) => {
         e.preventDefault()
@@ -20,7 +21,7 @@ const Form = (props) => {
             foto,
             equipo
         }
-        console.log(datos)
+        registrarColaborador(datos)
     }
 
     return(
