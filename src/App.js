@@ -4,10 +4,16 @@ import Form from './components/Form/Form';
 import Header from './components/Header/Header';
 import MiOrg from './components/MiOrg'
 import Equipo from './components/Equipo';
+import Footer from './components/Footer';
 
 function App() {
   const [mostrarFormulario, actualizarMostrar] = useState(false)
-  const [colaboradores, setColaboradores] = useState([])
+  const [colaboradores, setColaboradores] = useState([{
+    equipo: 'Front-End',
+    foto: 'https://github.com/harlandlohora.png',
+    nombre:'Joaquin Rios',
+    puesto:'Analista Programador'
+  }])
 
   // Ternario --> condicion ? seMuestra : noSeMuestra
   const cambiarMostrar = () => {
@@ -71,7 +77,12 @@ function App() {
         /> 
       }
       <MiOrg cambiarMostrar={cambiarMostrar} />
-      {equipos.map((equipo) => <Equipo datos={equipo} key={equipo.titulo}/>)}
+      {equipos.map((equipo) => <Equipo 
+        datos={equipo} 
+        key={equipo.titulo} 
+        colaboradores={colaboradores.filter ( colaborador => colaborador.equipo === equipo.titulo )}
+      />)}
+      <Footer/>
     </div>
   );
 }
