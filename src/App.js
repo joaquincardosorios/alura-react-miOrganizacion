@@ -14,35 +14,40 @@ function App() {
     equipo: 'Programación',
     foto: 'https://github.com/joaquincardosorios.png',
     nombre:'Eduardo Jara',
-    puesto:'Analista Programador'
+    puesto:'Analista Programador',
+    fav:false
   },
   {
     id: uuid(),
     equipo: 'Front-End',
     foto: 'https://github.com/joaquincardosorios.png',
     nombre:'Joaquin Rios',
-    puesto:'Analista Programador'
+    puesto:'Analista Programador',
+    fav:true
   },
   {
     id: uuid(),
     equipo: 'Data Science',
     foto: 'https://github.com/joaquincardosorios.png',
     nombre:'Melissa Muñoz',
-    puesto:'Analista Programador'
+    puesto:'Analista Programador',
+    fav:false
   },
   {
     id: uuid(),
     equipo: 'UX y Diseño',
     foto: 'https://github.com/joaquincardosorios.png',
     nombre:'Gustavo Ramirez',
-    puesto:'Analista Programador'
+    puesto:'Analista Programador',
+    fav:false
   },
   {
     id: uuid(),
     equipo: 'Programación',
     foto: 'https://github.com/joaquincardosorios.png',
     nombre:'Francisco Jara',
-    puesto:'Analista Programador'
+    puesto:'Analista Programador',
+    fav:false
   },
   ])
   const [equipos, setEquipos] = useState([
@@ -99,7 +104,7 @@ function App() {
   const registrarColaborador = (colaborador) => {
     setColaboradores([
       ...colaboradores,
-      colaborador
+      {...colaborador, id:uuid()}
     ])
   }
 
@@ -120,44 +125,22 @@ function App() {
     setEquipos(equiposActualizados)
   }
 
-  //Lista de equipos
-  // const equipos = [
-  //   {
-  //     titulo:"Programación",
-  //     colorPrimario: "#57C278",
-  //     colorSecundario: "#D9F7E9"
-  //   },
-  //   {
-  //     titulo:"Front-End",
-  //     colorPrimario: "#82CFFA",
-  //     colorSecundario: "#E8F8FF"
-  //   },
-  //   {
-  //     titulo:"Data Science",
-  //     colorPrimario: "#A6D157",
-  //     colorSecundario: "#F0F8E2"
-  //   },
-  //   {
-  //     titulo:"Devops",
-  //     colorPrimario: "#E06B69",
-  //     colorSecundario: "#FDE7E8"
-  //   },
-  //   {
-  //     titulo:"UX y Diseño",
-  //     colorPrimario: "#DB6EBF",
-  //     colorSecundario: "#FAE9F5"
-  //   },
-  //   {
-  //     titulo:"Movil",
-  //     colorPrimario: "#FFBA05",
-  //     colorSecundario: "#FFF5D9"
-  //   },
-  //   {
-  //     titulo:"Innovacion y Gestion",
-  //     colorPrimario: "#FF8A29",
-  //     colorSecundario: "#FFEEDF"
-  //   }
-  // ]
+  // Crear equipo
+  const crearEquipo = ((nuevoEquipo) => {
+    setEquipos([...equipos, {...nuevoEquipo, id:uuid()}])
+  })
+
+  const like = ((id) => {
+    const colaboradoresActualizado = colaboradores.map( (colaborador) => {
+      if(colaborador.id === id){
+        colaborador.fav = !colaborador.fav
+      }
+      return colaborador
+    })
+
+    setColaboradores(colaboradoresActualizado)
+  })
+
 
   return (
     <div>
@@ -166,6 +149,7 @@ function App() {
         <Form 
           equipos={equipos.map(equipo => equipo.titulo)}
           registrarColaborador={registrarColaborador}
+          crearEquipo={crearEquipo}
         /> 
       }
       <MiOrg cambiarMostrar={cambiarMostrar} />
@@ -175,6 +159,7 @@ function App() {
         colaboradores={colaboradores.filter ( colaborador => colaborador.equipo === equipo.titulo )}
         eliminarColaborador={eliminarColaborador}
         actualizarColor={actualizarColor}
+        like={like}
       />)}
       <Footer/>
     </div>
